@@ -28,11 +28,25 @@ const storage = multer.diskStorage({
       cb(null, "images");
     },
     filename: (req, file, cb) => {
-      cb(null, "myimage.jpg");
+      cb(null, Date.now() + "_" +  file.originalname);
     },
   });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+    storage: storage,
+    fileFilter: function(req, file, cb){
+        const extensionImageList = [".png", ".jpg"];
+        const extension = file.originalname.slice(-4);
+        const check = extensionImageList.includes(extension);
+        if(check){
+            cb(null, true);
+        }else{
+            cb(new Error("extention không hợp lệ"))
+        }
+    }
+});
+
+
 app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
 });
