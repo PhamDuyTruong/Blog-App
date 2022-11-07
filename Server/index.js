@@ -9,6 +9,7 @@ const path = require("path");
 
 const authRoute = require("./routers/auth");
 const userRoute = require("./routers/users");
+const postRoute = require("./routers/posts");
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ const URI = process.env.DB_URL;
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/post", postRoute);
 
 mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
     console.log('Connected to DB');
