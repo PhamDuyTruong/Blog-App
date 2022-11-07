@@ -10,7 +10,15 @@ const categoryControllers = {
           res.status(500).json(err);
         }
     },
-    
+    getAllCategory: async(req, res) => {
+        try {
+            const cat = await Category.find();
+            res.status(200).json(cat);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
 };
 
 module.exports = categoryControllers;
