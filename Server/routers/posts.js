@@ -7,7 +7,7 @@ router.post("/", postControllers.createPost);
 router.get("/", postControllers.getAllPost);
 router.get("/:id", postControllers.getPostById);
 
-
+router.put("/:id", postControllers.updatePost);
 
 module.exports = router;
 
