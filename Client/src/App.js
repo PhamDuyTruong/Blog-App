@@ -9,7 +9,7 @@ import Settings from './pages/Settings/Settings';
 import DetailPost from './components/DetailPost/DetailPost';
 
 function App() {
-  const currentUser = true;
+  const currentUser = false;
   return (
     <Router>
       <Navbar />
