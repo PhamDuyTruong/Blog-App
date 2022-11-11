@@ -1,10 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios'
 import {Link, useLocation} from 'react-router-dom';
 import "./DetailPost.css"
 
 function DetailPost() {
   const location = useLocation();
+  const path = location.pathname.split("/")[2];
+  const [post, setPost] = useState({});
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
   
+  useEffect(() => {
+    const getPost = async() => {
+      const res = await axios.get("/post/" + path);
+      setPost(res.data);
+      setTitle(res.data.title);
+      setDesc(res.data.desc);
+    };
+    getPost();
+  }, [path])
   return (
         <div className="singlePost">
           <div className="singlePostWrapper">
@@ -14,7 +28,7 @@ function DetailPost() {
               alt=""
             />
             <h1 className="singlePostTitle">
-              Lorem ipsum dolor
+              {title}
               <div className="singlePostEdit">
                 <i className="singlePostIcon far fa-edit"></i>
                 <i className="singlePostIcon far fa-trash-alt"></i>
@@ -24,42 +38,15 @@ function DetailPost() {
               <span>
                 Author:
                 <b className="singlePostAuthor">
-                  <Link className="link" to="/posts?username=TruongPham">
-                    Truong Pham
-                  </Link>
+                <Link to={`/?user=${post.username}`} className="link">
+                    <b> {post.username}</b>
+                </Link>
                 </b>
               </span>
-              <span>1 day ago</span>
+              <span>{new Date(post.createdAt).toDateString()}</span>
             </div>
             <p className="singlePostDesc">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-              quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-              Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-              eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-              error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-              impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-              odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-              elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-              iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-              a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-              elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-              iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-              a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-              elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-              iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-              a odit modi eos!
-              <br />
-              <br />
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-              quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-              Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-              eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-              error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-              impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-              odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-              elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-              iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-              a odit modi eos! Lorem, ipsum dolor sit amet consectetur.
+              {desc}
             </p>
           </div>
         </div>
