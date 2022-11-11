@@ -2,40 +2,30 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import "./Post.css"
 
-function Post({img}) {
+function Post({post}) {
   return (
     <div className='post'>
          <img
         className="postImg"
-        src={img}
-        alt=""
+        src="https://img.freepik.com/free-photo/worker-reading-news-with-tablet_1162-83.jpg?w=996&t=st=1668179366~exp=1668179966~hmac=243f1254d0108f32df4e390a907fea8ccf7bad009bf76cc392c605ac4c7a49f7"
+        alt="hinh anh"
       />
       <div className="postInfo">
         <div className="postCats">
-          <span className="postCat">
-            <Link className="link" to="/posts?cat=Music">
-              Music
-            </Link>
-          </span>
-          <span className="postCat">
-            <Link className="link" to="/posts?cat=Music">
-              Life
-            </Link>
-          </span>
+          {post.categories.map((c) => (
+            <span className="postCat">{c.name}</span>
+          ))}
         </div>
-        <span className="postTitle">
-          <Link to="/post/abc" className="link">
-            Lorem ipsum dolor sit amet
-          </Link>
+        <Link to={`/post/${post._id}`} className="link">
+        <span className="postTitle"> 
+            {post.title}
         </span>
+        </Link>
         <hr />
-        <span className="postDate">1 hour ago</span>
+        <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
       </div>
       <p className="postDesc">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-        officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
-        fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-        atque, exercitationem quibusdam, reiciendis odio laboriosam?
+          {post.desc}
       </p>
     </div>
   )

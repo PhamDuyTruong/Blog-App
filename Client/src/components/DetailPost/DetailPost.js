@@ -1,8 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import "./DetailPost.css"
 
 function DetailPost() {
+  const location = useLocation();
+  
   return (
         <div className="singlePost">
           <div className="singlePostWrapper">

@@ -6,6 +6,7 @@ import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Create from './pages/Create/Create';
 import Settings from './pages/Settings/Settings';
+import DetailPost from './components/DetailPost/DetailPost';
 
 function App() {
   const currentUser = true;
@@ -23,10 +24,13 @@ function App() {
               {currentUser ? <Home />: <Login />}
           </Route>
           <Route path="/create">
-            {currentUser ? <Create />: <Login />}
+            {currentUser ? <Create />: <Signup />}
           </Route>
           <Route path="/settings">
-            {currentUser ? <Settings /> : <Login />}
+            {currentUser ? <Settings /> : <Signup />}
+          </Route>
+          <Route path="/post/:postId">
+              <DetailPost />
           </Route>
       </Switch>
     </Router>
