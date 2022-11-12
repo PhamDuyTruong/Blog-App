@@ -3,13 +3,10 @@ import {Link} from 'react-router-dom';
 import "./Post.css"
 
 function Post({post}) {
+  const PF = "http://localhost:5000/images/";
   return (
     <div className='post'>
-         <img
-        className="postImg"
-        src="https://img.freepik.com/free-photo/worker-reading-news-with-tablet_1162-83.jpg?w=996&t=st=1668179366~exp=1668179966~hmac=243f1254d0108f32df4e390a907fea8ccf7bad009bf76cc392c605ac4c7a49f7"
-        alt="hinh anh"
-      />
+       {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}
       <div className="postInfo">
         <div className="postCats">
           {post.categories.map((c) => (
