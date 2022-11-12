@@ -37,7 +37,7 @@ function Navbar() {
           <Link className="link" to="/settings">
             <img
               className="topImg"
-              src="https://images.pexels.com/photos/33053/dog-young-dog-small-dog-maltese.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={user.profilePic}
               alt=""
             />
           </Link>
