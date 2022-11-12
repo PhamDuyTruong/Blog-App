@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from './pages/Home/Home';
@@ -7,9 +7,10 @@ import Login from './pages/Login/Login';
 import Create from './pages/Create/Create';
 import Settings from './pages/Settings/Settings';
 import DetailPost from './components/DetailPost/DetailPost';
+import {Context} from './context/Context'
 
 function App() {
-  const currentUser = false;
+  const {user} = useContext(Context);
   return (
     <Router>
       <Navbar />
@@ -18,16 +19,16 @@ function App() {
               <Home />
           </Route>
           <Route path="/register">
-              {currentUser ? <Home /> : <Signup />}
+              {user ? <Home /> : <Signup />}
           </Route>
           <Route path="/login">
-              {currentUser ? <Home />: <Login />}
+              {user ? <Home />: <Login />}
           </Route>
           <Route path="/create">
-            {currentUser ? <Create />: <Signup />}
+            {user ? <Create />: <Signup />}
           </Route>
           <Route path="/settings">
-            {currentUser ? <Settings /> : <Signup />}
+            {user ? <Settings /> : <Signup />}
           </Route>
           <Route path="/post/:postId">
               <DetailPost />
