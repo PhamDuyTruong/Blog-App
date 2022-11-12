@@ -25,7 +25,7 @@ function Navbar() {
           <li className="topListItem">ABOUT</li>
           <li className="topListItem">CONTACT</li>
           <li className="topListItem">
-            <Link className="link" to="/write">
+            <Link className="link" to="/create">
               WRITE
             </Link>
           </li>
